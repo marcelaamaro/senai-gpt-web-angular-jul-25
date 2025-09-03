@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+* { /*todos os elementos*/
+padding: 0px; /* Margem interna */
+margin: 0px; /* Margem externa */
+box-sizing: border-box; /* Muda a estrtura de espacamento */
+font-family: "Inter";
+    }
+
+.titulo {
+    font-size: 76px;
+    font-family:"Inter";
+    font-weight: 400;
+    margin-bottom: 16px;
+}
+
+.robo-image {
+    background-image: url("/imgs/robozito.png");
+    background-size: cover;
+    background-position: 0px -100px;
+    width: 50VW; /*50% da largura do monitor */
+    height: 100vh; /* 100% da altura do monitor */
+}
+
+   .page-container {
+    display: flex; /* um ao lado do outro */
+   }
+
+   .login-container {
+     width: 50VW; /*50% da largura do monitor */
+    height: 100vh; /* 100% da altura do monitor */
+    display: flex; /* ativar o flex */
+    flex-direction: column; /*muda o flex para colunas */
+    align-items: center; /* centralizar horizontalmente */
+    justify-content: center; /* centralizar verticalmente */
+   }
+
+.classe /* Com ponto antes */{
+ 
+
+ }
+
+#id /* Com hashtag antes */{
+
+}
+
+    
+ img /* Tags, sem nenhum prefixo */{
+   
+}
+
+.login-container img {
+    height: 60px;
+}
+
+.inpt {
+    padding: 18px; /* espaçamento interno */
+    background-color: #f7f9fb;
+    width: 377px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+.button{
+    cursor: pointer;
+ padding: 18px;
+ width: 377px;
+margin-bottom: 16px;
+background-color: #1c1c1c;
+color: #ffffff;
+border: none;
+    border-radius: 12px;
+font-size: 18px;
+}
