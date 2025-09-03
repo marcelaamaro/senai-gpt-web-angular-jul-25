@@ -1,2 +1,2 @@
 # senai-gpt-web-angular-jul-25
-Fazendo telas agora com o Angular.
+Fazendo telas do Senai GPT com o Angular.
