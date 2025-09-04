@@ -8,15 +8,15 @@
         </div>
     
     
-        <div class="login-container">
+        <div class="login-container" [formGroup]="loginForm">
             <img src="imgs/Chat.png" alt="Logo do SenaiGPT">
     
             <h1 class="titulo">Login</h1>
             
-        <input class="inpt" type="email" Placeholder="Insira o email">
-        <input class="inpt" type="password" placeholder= "Insira a senha">
+        <input class="inpt" type="email" Placeholder="Insira o email" formControlname="email">
+        <input class="inpt" type="password" placeholder= "Insira a senha" formControlname="password">
     
-        <button class= "button">Entrar</button>
+        <button class= "button" (click)="onloginClick()">Entrar</button>
     </div>
     
         </main> <!--Caixa maior-->
