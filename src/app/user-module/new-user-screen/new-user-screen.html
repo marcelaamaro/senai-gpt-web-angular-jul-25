@@ -1,0 +1,34 @@
+<body>
+
+    <header></header>
+        <main class="page-container"> <!--Caixa maior-->
+    
+        <div
+        class="up-image">
+        </div>
+    
+    
+        <div class="login-container" [formGroup]="loginForm">
+            <img src="imgs/up.jpg" alt="Logo do SenaiGPT">
+    
+            <h1 class="titulo">novo usuario</h1>
+            
+        
+        <input class="inpt" type="nome" Placeholder="Insira o nome do usuario" formControlName="nome">
+        <input class="inpt" type="email" Placeholder="Insira o email" formControlName="email">
+        <input class="inpt" type="password" placeholder= "Insira a senha" formControlName="password">
+        <input class="inpt" type="password" placeholder= "Insira a senha" formControlName="password">
+    
+        <button class= "button" (click)="onloginClick()">Entrar</button>
+
+        <h5 class="subtitulo">clique aqui para fazer o login</h5>
+    </div>
+    
+        </main> <!--Caixa maior-->
+    
+        <footer></footer>
+        
+        <script>
+            window.location.href = "./login";
+        </script>
+    </body>
