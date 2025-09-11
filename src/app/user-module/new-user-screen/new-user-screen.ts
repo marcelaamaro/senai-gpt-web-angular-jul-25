@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-new-user-screen',
@@ -18,6 +18,7 @@ export class NewUserScreen {
     //cria o campo obrigatorio de email.
     //cria o campo obrigatorio de senha.
     this.loginForm = this.fb.group({
+      nome: ["", [Validators.required]],
       email: ["", [Validators.required]],
       password: ["", [Validators.required]]
     });
@@ -28,6 +29,7 @@ export class NewUserScreen {
   async onloginClick() {
     alert("botao de login clicado.");
 
+    console.log("nome", this.loginForm.value.nome);
     console.log("email", this.loginForm.value.email);
     console.log("Password", this.loginForm.value.password);
 
@@ -42,6 +44,7 @@ export class NewUserScreen {
         "Content-type": "application/json"
       },
       body: JSON.stringify({
+        nome: this.loginForm.value.nome,
         email: this.loginForm.value.email,
         password: this.loginForm.value.password
       })

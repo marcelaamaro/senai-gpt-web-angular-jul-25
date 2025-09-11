@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginScreen } from './user-module/login-screen/login-screen';
 import { ChatScreen } from './chat-screen/chat-screen';
 import { authGuard } from './auth.guard';
+import { NewUserScreen } from './user-module/new-user-screen/new-user-screen';
 
 export const routes: Routes = [
     {
@@ -18,5 +19,10 @@ export const routes: Routes = [
         loadComponent: () => ChatScreen,
 
         canActivate: [authGuard]
-    }
+    },
+
+     {
+        path: "new-user",
+        loadComponent:() => NewUserScreen
+    },
 ];
