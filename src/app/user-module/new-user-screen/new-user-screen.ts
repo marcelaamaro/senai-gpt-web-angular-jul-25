@@ -9,7 +9,13 @@ import { FormBuilder, FormGroup, NgModel, ReactiveFormsModule, Validators } from
 })
 export class NewUserScreen {
 
-  loginForm: FormGroup;
+  registerForm: FormGroup;
+
+  emailErrorMessage: string;
+  passwordErrorMessage: string;
+  confirmpasswordErrorMessage: string;
+  approvedMessage: string;
+  usernameErrorMessage: string;
 
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
     //quando a tela iniciar.
@@ -17,26 +23,43 @@ export class NewUserScreen {
     //inicia o formulario.
     //cria o campo obrigatorio de email.
     //cria o campo obrigatorio de senha.
-    this.loginForm = this.fb.group({
+    this.registerForm = this.fb.group({
       nome: ["", [Validators.required]],
       email: ["", [Validators.required]],
       password: ["", [Validators.required]]
     });
 
+    this.emailErrorMessage="";
+    this.passwordErrorMessage="";
+    this.confirmpasswordErrorMessage="";
+    this.approvedMessage="";
+    this.usernameErrorMessage=""
 
   }
 
   async onloginClick() {
-    alert("botao de login clicado.");
 
-    console.log("nome", this.loginForm.value.nome);
-    console.log("email", this.loginForm.value.email);
-    console.log("Password", this.loginForm.value.password);
+    console.log("nome", this.registerForm.value.nome);
+    console.log("email", this.registerForm.value.email);
+    console.log("Password", this.registerForm.value.password);
 
-    if (this.loginForm.value.email == "") {
-      alert("Preencha o e-mail.");
+    if (this.registerForm.value.email == "") {
+      this.emailErrorMessage = "Campo de email obrigatorio";
       return;
     }
+
+if (this.registerForm.value.password == "") {
+      this.passwordErrorMessage = "Campo obrigatorio";
+      return;
+    }
+
+    if (this.registerForm.value.name == "") {
+      this.usernameErrorMessage = "Campo obrigatorio";
+      return;
+    }
+
+
+
 
     let response = await fetch("https://senai-gpt-api.azurewebsites.net/login", {
       method: "POST", //enviar informacao
@@ -44,26 +67,34 @@ export class NewUserScreen {
         "Content-type": "application/json"
       },
       body: JSON.stringify({
-        nome: this.loginForm.value.nome,
-        email: this.loginForm.value.email,
-        password: this.loginForm.value.password
+        nome: this.registerForm.value.nome,
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password
       })
     });
-    console.log("STATUS CODE", response.status);
 
+    console.log("STATUS CODE", response.status);
 
     if (response.status <= 299) {
       //Bloco positivo
       alert("Deu tudo certo");
+    this.approvedMessage = "Login concluido com sucesso!"
+
+
 let json = await response.json();
+
 console.log("JSON", json);
-let meuToken = json.accessToken;
+
+
+let meuToken = json.acessToken;
 let userId = json.user.id;
 
-localStorage.setItem("meuToken", meuToken);
-localStorage.setItem("meuId", userId);
+
+localStorage.setItem("meuToken",meuToken);
+localStorage.setItem("meuId",userId);
 
 window.location.href = "chat";
+
     } else {
       //Bloco do falso
       alert("deu errado");

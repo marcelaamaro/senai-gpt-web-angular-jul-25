@@ -4,7 +4,7 @@
     <div class="robo-image">
     </div>
 
-    <div class="login-container" [formGroup]="loginForm">
+    <div class="login-container" [formGroup]="registerForm">
         
         <img src="imgs/Chat.png" alt="logo do senai">
 
@@ -12,9 +12,20 @@
 
 
         <input class="inpt" type="nome" Placeholder="Insira o nome do usuario" formControlName="nome">
+        <span class="error-message">{{ usernameErrorMessage }}</span>
+
         <input class="inpt" type="email" Placeholder="Insira o email" formControlName="email">
+        <span class="error-message">{{ emailErrorMessage }}</span>
+
         <input class="inpt" type="password" placeholder="Insira a senha" formControlName="password">
+        <span class="error-messagepassword">{{ passwordErrorMessage }}</span>
+        <span class="approvedMessage">{{ approvedMessage }}</span>
+
+
+
         <input class="inpt" type="password" placeholder="Insira a senha" formControlName="password">
+        <span class="error-messagepassword">{{ passwordErrorMessage }}</span>
+        <span class="approvedMessage">{{ approvedMessage }}</span>
 
         <button class="button" (click)="onloginClick()">Entrar</button>
 
