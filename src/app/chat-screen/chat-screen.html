@@ -5,27 +5,25 @@
 
         <div class="top">
 
-            <div><button class="button"><i class="fa-solid fa-plus"></i>New chat</button></div>
+            <div><button class="button">
+                    <i class="fa-solid fa-plus"></i>
+                    New chat</button>
+            </div>
 
-                <button class="barra">
-                    <i class="fa-regular fa-message"></i>
-                    Ai Chat Tool Ethics</button>
 
-                <button class="barra">
+            <div class="chat-list">
+                <button *ngFor="let chat of chats" class="barra">
                     <i class="fa-regular fa-message"></i>
-                    Ai Chat Tool Impact Writing</button>
-
-                <button class="barra">
-                    <i class="fa-regular fa-message"></i>
-                    New hat</button>
+                    {{ chat.chatTitle }}</button>
+            </div>
         </div>
 
         <div class="bottom">
-                <button class="barra"><i class="fa-solid fa-trash-can"></i> Clear conversations</button>
-                <button class="barra"><i class="fa-solid fa-lightbulb"></i>Light mode</button>
-                <button class="barra"><i class="fa-regular fa-user"></i>My account</button>
-                <button class="barra"><i class="fa-regular fa-pen-to-square"></i> Updates & FAQ</button>
-                <button class="barra"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
+            <button class="barra"><i class="fa-solid fa-trash-can"></i> Clear conversations</button>
+            <button class="barra"><i class="fa-solid fa-lightbulb"></i>Light mode</button>
+            <button class="barra"><i class="fa-regular fa-user"></i>My account</button>
+            <button class="barra"><i class="fa-regular fa-pen-to-square"></i> Updates & FAQ</button>
+            <button class="barra"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
         </div>
     </aside>
 
@@ -62,13 +60,13 @@
             </div>
 
         </div>
-<div class="input-container">
-<i class="fa-solid fa-microphone"></i>
-<i class="fa-solid fa-image"></i>
-<input type="text" placeholder="Type message"/>
-<i class="send-button fa-solid fa-paper-plane"></i>
+        <div class="input-container">
+            <i class="fa-solid fa-microphone"></i>
+            <i class="fa-solid fa-image"></i>
+            <input type="text" placeholder="Type message" />
+            <i class="send-button fa-solid fa-paper-plane"></i>
 
-</div>
+        </div>
 
     </main>
 

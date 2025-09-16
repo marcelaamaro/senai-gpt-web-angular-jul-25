@@ -21,4 +21,3 @@ describe('NewUserScreen', () => {
     expect(component).toBeTruthy();
   });
 });
-

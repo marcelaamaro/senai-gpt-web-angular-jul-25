@@ -1,5 +1,7 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup, NgModel, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { ChangeDetectorRef} from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-new-user-screen',
@@ -11,95 +13,120 @@ export class NewUserScreen {
 
   registerForm: FormGroup;
 
-  emailErrorMessage: string;
+  emailErrorMessage: string; 
   passwordErrorMessage: string;
-  confirmpasswordErrorMessage: string;
+  confirmPasswordErrorMessage: string;
   approvedMessage: string;
   usernameErrorMessage: string;
 
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
-    //quando a tela iniciar.
+    // Quando a tela iniciar.
 
-    //inicia o formulario.
-    //cria o campo obrigatorio de email.
-    //cria o campo obrigatorio de senha.
+    //Inicia o formulário;
+    //Cria campo obrigatório de e-mail;
+    //Cria campo obrigatório de senha.
     this.registerForm = this.fb.group({
-      nome: ["", [Validators.required]],
-      email: ["", [Validators.required]],
-      password: ["", [Validators.required]]
+      username: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ["", [Validators.required]]
     });
 
-    this.emailErrorMessage="";
-    this.passwordErrorMessage="";
-    this.confirmpasswordErrorMessage="";
-    this.approvedMessage="";
-    this.usernameErrorMessage=""
+    // Inicia com uma string vazia
+    this.emailErrorMessage = "";
+    this.passwordErrorMessage = "";
+    this.confirmPasswordErrorMessage = "";
+    this.approvedMessage = "";
+    this.usernameErrorMessage = "";
 
   }
 
-  async onloginClick() {
+  async enterLoginClick() {
 
-    console.log("nome", this.registerForm.value.nome);
-    console.log("email", this.registerForm.value.email);
+    console.log("Email", this.registerForm.value.email);
     console.log("Password", this.registerForm.value.password);
+    console.log("Criar nova conta de usuário", this.registerForm.value.username);
+    console.log("Confirmar a senha", this.registerForm.value.confirmPassword);
+    
+          
+    if (this.registerForm.value.username === ""){
 
-    if (this.registerForm.value.email == "") {
-      this.emailErrorMessage = "Campo de email obrigatorio";
-      return;
+      this.usernameErrorMessage = "O campo usuário é obrigatório.";
+
+    } 
+    
+    if (this.registerForm.value.email === ""){
+
+      this.emailErrorMessage = "O campo e-mail é obrigatório.";
+
+      this.emailErrorMessage = "Digite um e-mail válido.";
+
     }
 
-if (this.registerForm.value.password == "") {
-      this.passwordErrorMessage = "Campo obrigatorio";
+    if (this.registerForm.value.password === ""){
+
+      // alert("Preencha a senha.")
+      this.passwordErrorMessage = "O campo senha é obrigatório.";
       return;
+
     }
 
-    if (this.registerForm.value.name == "") {
-      this.usernameErrorMessage = "Campo obrigatorio";
+    if (this.registerForm.value.confirmPassword === ""){
+
+      // alert("Preencha a senha.")
+      this.confirmPasswordErrorMessage = "O campo senha é obrigatório.";
       return;
+
     }
 
+    if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) { 
+      this.confirmPasswordErrorMessage = "As senhas não coincidem.";
+      return;
+    } 
 
+      const userData = {
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password,
+      username: this.registerForm.value.username
+    };
 
+    //   this.http.post("https://senai-gpt-api.azurewebsites.net/users", userData).subscribe(
+    //   (response: any) => {
+    //     this.approvedMessage = "Cadastro realizado com sucesso!";
+    //     console.log("Resposta do backend:", response);
 
-    let response = await fetch("https://senai-gpt-api.azurewebsites.net/login", {
-      method: "POST", //enviar informacao
+    //   },
+    //   (error: HttpErrorResponse) => {
+    //     console.error("Erro ao cadastrar usuário:", error);
+    //     alert("Erro ao realizar cadastro. Tente novamente.");
+    //   }
+
+    // );
+    
+    let response = await fetch("https://senai-gpt-api.azurewebsites.net/users", {
+      method: "POST", // Enviar,
       headers: {
-        "Content-type": "application/json"
+        "Content-Type" : "application/json"
       },
-      body: JSON.stringify({
-        nome: this.registerForm.value.nome,
-        email: this.registerForm.value.email,
-        password: this.registerForm.value.password
-      })
+      body: JSON.stringify(userData)
     });
 
     console.log("STATUS CODE", response.status);
+   
+    if (response.status >= 200 && response.status <=299) {
+      //alert("Requisição bem-sucedida");
+      this.approvedMessage = "Login concluido com sucesso!"
 
-    if (response.status <= 299) {
-      //Bloco positivo
-      alert("Deu tudo certo");
-    this.approvedMessage = "Login concluido com sucesso!"
+      let json = await response.json();
 
+      console.log("JSON", json)
 
-let json = await response.json();
-
-console.log("JSON", json);
-
-
-let meuToken = json.acessToken;
-let userId = json.user.id;
-
-
-localStorage.setItem("meuToken",meuToken);
-localStorage.setItem("meuId",userId);
-
-window.location.href = "chat";
+      window.location.href = "login";
 
     } else {
-      //Bloco do falso
-      alert("deu errado");
+      alert("Credenciais incorretas.");
+    } 
 
-      this.cd.detectChanges(); //Forcar uma atualizacao da tela.
-    }
-  }
-}
+    this.cd.detectChanges(); // Força uma atualização da tela.
+
+  }}
