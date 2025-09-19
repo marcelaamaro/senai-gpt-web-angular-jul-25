@@ -5,16 +5,18 @@
 
         <div class="top">
 
-            <div><button class="button">
+            <div>
+                <button class="button"(click)="novoChat()">
                     <i class="fa-solid fa-plus"></i>
-                    New chat</button>
+                    New chat
+                </button>
             </div>
 
 
             <div class="chat-list">
-                <button *ngFor="let chat of chats" (click)="onChatClick(chat)" class="barra">
-                    <i class="fa-regular fa-message"></i>
-                    {{ chat.chatTitle }}</button>
+            <button *ngFor="let chat of chats" (click)="onChatClick(chat)" class="barra">
+            <i class="fa-regular fa-message"></i>
+            {{ chat.chatTitle }}</button>
             </div>
         </div>
 
@@ -64,13 +66,14 @@
         }
 
         @if (chatSelecionado != null){
+        <!--so vai ser executado quando o usuario tiver clicado em um chat-->
 
         <div class="chat-container">
-            
+
             <div class="chat-header">
                 <h2>{{ chatSelecionado.chatTitle }}</h2>
             </div>
-    
+
             <div class="chat-messages">
                 @for (msg of mensagens; track $index) {
                 <p class="message-item" [class.chatbot]="msg.userId == 'chatbot'">{{ msg.text }}</p>
@@ -79,18 +82,14 @@
 
         </div>
 
-        }
-
-        
         <div class="input-container">
-            <i class="fa-solid fa-microphone"></i>
-            <i class="fa-solid fa-image"></i>
-
-<input [formControl]="mensagemUsuario" type="text" placeholder="Type message">
-
-            <i class="send-button fa-solid fa-paper-plane" (click)="enviarMensagem()"></i>
-
+        <i class="fa-solid fa-microphone"></i>
+        <i class="fa-solid fa-image"></i>
+        <input [formControl]="mensagemUsuario" type="text" placeholder="Type message">
+        <i class="send-button fa-solid fa-paper-plane" (click)="enviarMensagem()"></i>
         </div>
+
+        }
 
     </main>
 

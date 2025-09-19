@@ -92,6 +92,7 @@ export class ChatScreen {
   }
 
   async enviarMensagem() {
+    
 
     let novaMensagemUsuario = {
 
@@ -146,4 +147,31 @@ export class ChatScreen {
     }));
 await this.onChatClick(this.chatSelecionado);
   }
+
+  async novoChat() {
+  
+  const nomeChat = prompt("Disgite o nome do novo chat:");
+
+  if (!nomeChat) {
+
+    alert("Nome invalido.");
+    return;
+  }
+
+const novoChatObj = {
+
+  chatTitle: nomeChat,
+  userId: localStorage.getItem("meuId")
+  //id - o backend ira gerar.
+}
+
+let novoChatResponse = await firstValueFrom(this.http.post("http://senai-gpt-api.azurewebsites.net/chats", novoChatObj, {
+  headers: {
+    "Content-Type": "application/json",
+  "Authorization":  "Bearer"+ localStorage.getItem("meuToken")}
+  }
+
+));
+
+}
 }

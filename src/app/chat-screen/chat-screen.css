@@ -32,6 +32,7 @@
 .top {
     width: 100%;
     min-height: 300px;
+    overflow: auto;
     background-color: #ffffff;
     margin-bottom: 20px;
     align-items: center;
