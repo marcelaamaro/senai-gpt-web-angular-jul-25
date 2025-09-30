@@ -3,22 +3,22 @@
 
     <aside class="left-panel">
 
-        <div class="top">
+        <div class="top">         
 
             <div>
                 <button class="button"(click)="novoChat()">
-                    <i class="fa-solid fa-plus"></i>
-                    New chat
-                </button>
-            </div>
+                    <i class="fa-solid fa-plus"></i> 
+                    New chat  
+                </button>  
+            </div>  
 
 
             <div class="chat-list">
             <button *ngFor="let chat of chats" (click)="onChatClick(chat)" class="barra">
             <i class="fa-regular fa-message"></i>
-            {{ chat.chatTitle }}</button>
+            {{ chat.chatTitle }}</button>   
             </div>
-        </div>
+        </div> 
 
         <div class="bottom">
             <button class="barra"><i class="fa-solid fa-trash-can"></i> Clear conversations</button>

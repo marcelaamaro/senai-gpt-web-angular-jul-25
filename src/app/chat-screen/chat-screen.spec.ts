@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChatScreen } from './chat-screen';
 
 describe('ChatScreen', () => {
-  let component: ChatScreen;
+  let component: ChatScreen; 
   let fixture: ComponentFixture<ChatScreen>;
 
   beforeEach(async () => {

@@ -102,3 +102,25 @@ justify-content: center; /* Centralizar verticalmente */
     color: black;
     padding: 16px;
 }
+
+/* Midia Query */
+@media screen and (max-width: 1366px) {
+}
+
+@media screen and (max-width: 1000px){
+
+    .robo-image{
+        background-position: center;
+    }
+    
+}
+
+@media screen and (max-width: 768px){
+    .robo-image{
+
+    display: none;
+    }
+    .login-container{
+        width: 100vw;
+    }
+}
