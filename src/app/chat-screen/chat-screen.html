@@ -22,9 +22,16 @@
 
         <div class="bottom">
             <button class="barra"><i class="fa-solid fa-trash-can"></i> Clear conversations</button>
-            <button class="barra"><i class="fa-solid fa-lightbulb"></i>Light mode</button>
+
+            <button class="barra"(click)="ligarDesligarDarkMode()">
+                <i class="fa-solid fa-moon">
+
+                </i>dark mode</button>
+
             <button class="barra"><i class="fa-regular fa-user"></i>My account</button>
+
             <button class="barra"><i class="fa-regular fa-pen-to-square"></i> Updates & FAQ</button>
+
             <button class="barra"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</button>
         </div>
     </aside>
@@ -33,7 +40,7 @@
     <main class="central-panel">
 
         @if (chatSelecionado == null) {
-        <img class="logo" src="imgs/Chat.png" alt="Logo do SenaiGPT">
+        <img class="logo" [src]="darkMode == true? 'imgs/logowhite.png' : 'imgs/Chat.png'" alt="Logo do SenaiGPT"/>
 
 
         <div class="colunas">

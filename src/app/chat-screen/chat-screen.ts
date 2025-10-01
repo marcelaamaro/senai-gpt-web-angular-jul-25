@@ -32,6 +32,7 @@ export class ChatScreen {
   chatSelecionado: Ichat;
   mensagens: IMessage[];
   mensagemUsuario = new FormControl("");
+  darkMode: boolean = false;
 
   constructor(private http: HttpClient, private cd: ChangeDetectorRef) { // Constroi a classe
     // inicializacao de variaveis...
@@ -43,6 +44,13 @@ export class ChatScreen {
   ngOnInit() {  //executado quando o angular esta pronto para rodar
     // buscar dados da API.
     this.getChats();
+
+    let darkModeLocalStorage = localStorage.getItem("darkMode");
+
+    if (darkModeLocalStorage == "true") {
+      this.darkMode = true;
+      document.body.classList.toggle("dark-mode", this.darkMode);
+    }
 
   }
 
@@ -149,6 +157,7 @@ await this.onChatClick(this.chatSelecionado);
   }
 
   async novoChat() {
+    
   
   const nomeChat = prompt("Disgite o nome do novo chat:");
 
@@ -173,5 +182,13 @@ let novoChatResponse = await firstValueFrom(this.http.post("http://senai-gpt-api
 
 ));
 
+}
+
+ligarDesligarDarkMode(){
+
+  this.darkMode = !this.darkMode; // o inverso do this.darkmode.
+  document.body.classList.toggle("dark-mode", this.darkMode);
+
+  localStorage.setItem("darkMode", this.darkMode.toString());
 }
 }
